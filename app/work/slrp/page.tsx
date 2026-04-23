@@ -10,6 +10,22 @@ const navLinks: { label: string; href: string }[] = [
 
 const categories = ["Branding", "Web Development"];
 
+const pillGlowByLabel: Record<string, string> = {
+  Branding: "#FE4F18",
+  "Social Media": "#FE4F18",
+  "Web Development": "#FFBE00",
+  "AI Automation": "#F4F4F4",
+};
+
+function getPillStyle(label: string) {
+  const glow = pillGlowByLabel[label] ?? "#F4F4F4";
+
+  return {
+    borderColor: "rgba(255,255,255,0.28)",
+    boxShadow: `inset 0 1px 0 rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.12), 0 0 10px ${glow}1F`,
+  };
+}
+
 const challengePoints = [
   "The original website looked static and didn't reflect the speed and energy of SLRP's in-store experience.",
   "Navigation and content hierarchy felt fragmented, making it harder for customers to discover what to order first.",
@@ -73,7 +89,8 @@ export default function SlrpWorkPage() {
                     {categories.map((category) => (
                       <span
                         key={category}
-                        className="rounded-full border border-[#3A3A3A] bg-[#1B1B1B] px-3 py-1 text-[11px] font-medium tracking-[0.02em] text-[#ECE2D6]"
+                        className="rounded-full border bg-white/[0.06] px-3 py-1 text-[11px] font-medium tracking-[0.02em] text-[#F4ECE0] backdrop-blur-[8px]"
+                        style={getPillStyle(category)}
                       >
                         {category}
                       </span>

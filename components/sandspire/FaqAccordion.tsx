@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export function FaqAccordion({
   items,
@@ -11,22 +11,43 @@ export function FaqAccordion({
   }>;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const accordionRef = useRef<HTMLDivElement | null>(null);
 
   const normalizedItems = useMemo(() => items, [items]);
 
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        accordionRef.current &&
+        event.target instanceof Node &&
+        !accordionRef.current.contains(event.target)
+      ) {
+        setOpenIndex(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
+
   return (
-    <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-2 lg:gap-4">
+    <div
+      ref={accordionRef}
+      className="grid grid-cols-1 items-start gap-3.5 lg:grid-cols-2 lg:gap-4"
+    >
       {normalizedItems.map((item, idx) => {
         const isOpen = openIndex === idx;
 
         return (
           <div
             key={item.question}
-            className="overflow-hidden rounded-[38px] border border-white/20 bg-white/[0.004]"
+            className="overflow-hidden rounded-[38px] border border-white/20 bg-white/[0.004] p-[15px]"
           >
             <button
               type="button"
-              className="flex w-full items-center gap-4 px-5 py-4 text-left"
+              className="flex w-full items-center gap-3 text-left"
               onClick={() => setOpenIndex((prev) => (prev === idx ? null : idx))}
               aria-expanded={isOpen}
             >
@@ -47,8 +68,8 @@ export function FaqAccordion({
 
             <div
               className={[
-                "px-9 pb-4 transition-[max-height,opacity] duration-200",
-                isOpen ? "max-h-52 opacity-100" : "max-h-0 opacity-0",
+                "transition-[max-height,opacity,padding] duration-200",
+                isOpen ? "max-h-52 opacity-100 px-[15px] pb-[15px] pt-4" : "max-h-0 opacity-0 px-0 pb-0 pt-0",
               ].join(" ")}
             >
               {isOpen ? (

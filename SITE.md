@@ -20,6 +20,15 @@
 - `AgentationProvider` - included by the app layout.
 
 ## Recent Changes
+- 2026-04-20: Refined service-pill styling so outlines are now neutral glass and only the outer glow carries the category color.
+- 2026-04-20: Softened the new glassmorphism service-pill glow intensity on work pages while keeping the same color mapping by service type.
+- 2026-04-20: Restyled work/project category pills with a glass-outline look and subtle color glows by service type (orange for Branding/Social Media, yellow for Web Development, soft white for AI Automation).
+- 2026-04-20: Added click-outside behavior to the FAQ so any open answer closes automatically when clicking anywhere outside the FAQ area.
+- 2026-04-20: Fixed FAQ grid card behavior so opening one answer no longer visually stretches the neighboring card in the same row.
+- 2026-04-20: Increased spacing between each FAQ question and its expanded answer text across all FAQ cards for easier reading.
+- 2026-04-20: Updated the homepage hero dark gradient overlay layer so it is sized with full width/height from the bottom-right anchor instead of using full inset positioning.
+- 2026-04-20: Fixed FAQ title alignment by removing closed-state answer spacing and increased FAQ pill inner padding from 5px to 15px.
+- 2026-04-20: Updated FAQ row pills to hug their content with 5px inner padding and tighter row spacing.
 - 2026-04-17: Made the `/work/slrp` case-study section smaller again: reduced section vertical padding and container widths, tightened image block max widths/gaps, and lowered supporting/portrait image minimum heights for a more compact composition.
 - 2026-04-17: Adjusted `/work/slrp` asymmetrical image block alignment for tablet/desktop feedback: shifted the grid left (`ml-0 mr-auto`), increased inter-column spacing (`48px→64px`), and added slight left inset on the portrait column.
 - 2026-04-17: Scaled the `/work/slrp` image section down further per follow-up: reduced section/container widths and padding again, tightened the column gap slightly, and lowered image minimum heights (portrait `680→600`, supporting `280→240`).

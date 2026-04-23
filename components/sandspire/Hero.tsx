@@ -23,7 +23,7 @@ export function Hero() {
               playsInline
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/72 via-black/48 to-black/20" />
+          <div className="absolute bottom-0 right-0 h-full w-full bg-gradient-to-b from-black/72 via-black/48 to-black/20" />
 
           <div className="sticky top-0 z-30 h-[50px] bg-gradient-to-b from-[#141414]/65 to-[#0d0d0d]/55 px-5 backdrop-blur-[6px] lg:px-7">
             <div className="mx-auto flex h-full max-w-[1220px] items-center justify-between gap-5">

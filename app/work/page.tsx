@@ -10,6 +10,22 @@ const navLinks: { label: string; href: string }[] = [
 
 const categories = ["All", "Branding", "Web Development", "Social Media"];
 
+const pillGlowByLabel: Record<string, string> = {
+  Branding: "#FE4F18",
+  "Social Media": "#FE4F18",
+  "Web Development": "#FFBE00",
+  "AI Automation": "#F4F4F4",
+};
+
+function getPillStyle(label: string) {
+  const glow = pillGlowByLabel[label] ?? "#F4F4F4";
+
+  return {
+    borderColor: "rgba(255,255,255,0.28)",
+    boxShadow: `inset 0 1px 0 rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.12), 0 0 10px ${glow}1F`,
+  };
+}
+
 const projects = [
   {
     title: "3 Fils",
@@ -152,7 +168,8 @@ export default function WorkPage() {
                   {project.tags.map((tag) => (
                     <span
                       key={`${project.title}-${tag}`}
-                      className="rounded-full bg-[#1F1F1F] px-3 py-1.5 text-[11px] text-[#E6DDD0]"
+                      className="rounded-full border bg-white/[0.06] px-3 py-1.5 text-[11px] font-medium text-[#F4ECE0] backdrop-blur-[8px]"
+                      style={getPillStyle(tag)}
                     >
                       {tag}
                     </span>
