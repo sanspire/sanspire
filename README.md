@@ -1,88 +1,87 @@
-# Static Marketing Site Starter
+# Sandspire
 
-Build marketing sites with Claude Code. No coding required.
+Sandspire is a custom marketing website for a creative studio focused on brand strategy, web design, social media, and AI automation. The site presents the studio's positioning, services, selected work, about page, and contact flow in a polished editorial-style layout.
 
-## What is this?
+## What the Site Includes
 
-A Next.js template designed specifically for building marketing websites with Claude Code inside Ship Studio. Just describe what you want to build, and Claude handles all the code.
+- A full-screen homepage hero with motion background and service overview
+- A services section covering brand strategy, web design, social media marketing, and AI automation
+- A selected work page with portfolio cards and case study previews
+- Dedicated `About` and `Contact` pages
+- A contact section with FAQ content and a styled inquiry form
 
-## Getting Started
+## Routes
 
-1. **Install dependencies**
+- `/` - Homepage
+- `/work` - Portfolio overview
+- `/work/slrp` - Detailed case study page
+- `/about` - Studio overview
+- `/contact` - Contact page and FAQ
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Motion
+- OpenNext for Cloudflare deployment
+
+## Local Development
+
+1. Install dependencies:
+
    ```bash
    npm install
    ```
 
-2. **Start the development server**
+2. Start the dev server:
+
    ```bash
    npm run dev
    ```
 
-3. **Open Claude Code and start building**
+3. Open `http://localhost:3000`
 
-   Just describe what you want:
-   - "Create a landing page for my coffee shop"
-   - "I need a portfolio site with a contact form"
-   - "Build a pricing page with three tiers"
+## Available Scripts
 
-## Available Commands
-
-| Command | Description |
-|---------|-------------|
-| `/onboarding` | Set up a new project. Claude asks about your business and creates a personalized build plan. |
-| `/page-remake` | Rebuild from an example. Share a URL you like, and Claude creates something similar. |
-| `/sanity-cms` | Add editable content. When you want to update text yourself without touching code. |
-
-## How It Works
-
-1. **Start a conversation** - Just type what you want to build
-2. **Claude builds it** - All the code is handled for you
-3. **Refine together** - Ask for changes until it's perfect
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local Next.js dev server |
+| `npm run build` | Build the app for Cloudflare via OpenNext |
+| `npm run start` | Run the production Next.js server locally |
+| `npm run preview` | Build and preview the Cloudflare worker locally |
+| `npm run deploy` | Build and deploy to Cloudflare |
+| `npm run lint` | Run ESLint |
+| `npm run typecheck` | Run TypeScript type checking |
+| `npm run cf-typegen` | Generate Cloudflare environment types |
 
 ## Project Structure
 
-```
+```text
 app/
-├── layout.tsx       # Page wrapper (fonts, metadata)
-├── page.tsx         # Homepage
-├── globals.css      # Global styles
-└── [folders]/       # Other pages (about/, contact/, etc.)
-components/          # Reusable pieces
-public/              # Images and files
+  layout.tsx        # Global layout, fonts, metadata
+  page.tsx          # Homepage
+  about/page.tsx    # About page
+  contact/page.tsx  # Contact page
+  work/             # Portfolio pages
+
+components/sandspire/
+  Hero.tsx
+  ServicesBento.tsx
+  CaseStudies.tsx
+  ContactFAQ.tsx
+  SiteFooter.tsx
+  ...               # Reusable Sandspire sections
+
+public/
+  images/           # Project imagery and section assets
+  logos/            # Brand logos
+  videos/           # Hero and social proof motion assets
 ```
 
-## Design Philosophy
+## Notes
 
-This starter follows **Human-First Design Principles**:
-
-- **Intentional** - Every design choice has a reason
-- **Distinctive** - Not a copy of common patterns
-- **Memorable** - Something visitors remember
-- **Human** - Warm and approachable
-
-## Documentation
-
-- **CLAUDE.md** - Instructions for Claude Code (how to build your site)
-- **SITE.md** - Your project documentation (created during onboarding)
-
-## Tech Stack
-
-- [Next.js 14+](https://nextjs.org/) - React framework
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [Google Fonts](https://fonts.google.com/) - Typography
-
-## Deploy
-
-Deploy to Vercel with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
-
-Or deploy manually:
-```bash
-npm run build
-npm start
-```
-
----
-
-Built for use with [Claude Code](https://claude.com/claude-code)
+- The contact form is currently presentational. Submitting it updates UI state, but it does not send data to a backend or email provider yet.
+- `Agentation` only renders in development.
+- Deployment is configured for Cloudflare using `@opennextjs/cloudflare` and `wrangler`.
