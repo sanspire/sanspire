@@ -47,7 +47,7 @@ export function FaqAccordion({
           >
             <button
               type="button"
-              className="flex min-h-[75px] w-full items-center gap-10 px-8 py-7 text-left sm:gap-11"
+              className="flex min-h-[75px] w-full items-center gap-10 px-8 py-7 text-left transition-colors duration-200 ease-out hover:bg-white/[0.04] sm:gap-11"
               onClick={() => setOpenIndex((prev) => (prev === idx ? null : idx))}
               aria-expanded={isOpen}
             >

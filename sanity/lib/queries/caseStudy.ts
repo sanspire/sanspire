@@ -1,5 +1,6 @@
 import type { SanityImageSource } from "@sanity/image-url";
 import { defineQuery } from "next-sanity";
+import { cache } from "react";
 
 import { client } from "../client";
 
@@ -73,12 +74,42 @@ export type CaseStudyDocument = {
   resultImageTallPath?: string | null;
 } | null;
 
-export async function getCaseStudyBySlug(
+const SANITY_CASE_STUDY_FETCH_MS = 12_000;
+
+async function getCaseStudyBySlugImpl(
   slug: string,
 ): Promise<CaseStudyDocument> {
-  return client.fetch(
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  const timeoutPromise = new Promise<"timeout">((resolve) => {
+    timeoutId = setTimeout(() => resolve("timeout"), SANITY_CASE_STUDY_FETCH_MS);
+  });
+
+  const fetchPromise = client.fetch(
     CASE_STUDY_BY_SLUG_QUERY,
     { slug },
     { next: { tags: [`caseStudy:${slug}`] } },
   );
+
+  try {
+    const result = await Promise.race([fetchPromise, timeoutPromise]);
+    if (result === "timeout") {
+      if (process.env.NODE_ENV === "development") {
+        console.warn(
+          `[sandspire] Sanity case study fetch timed out (${SANITY_CASE_STUDY_FETCH_MS}ms, slug: ${slug}) — using code fallbacks.`,
+        );
+      }
+      return null;
+    }
+    return result;
+  } catch (err) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn(`[sandspire] Sanity case study fetch failed (${slug}):`, err);
+    }
+    return null;
+  } finally {
+    if (timeoutId !== undefined) clearTimeout(timeoutId);
+  }
 }
+
+/** Cached per request; avoids duplicate GROQ calls from generateMetadata + page. */
+export const getCaseStudyBySlug = cache(getCaseStudyBySlugImpl);

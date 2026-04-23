@@ -43,7 +43,10 @@ export function SiteFooter() {
               <ul className="mt-1 space-y-1.5 text-[12px] font-normal text-[#BEB7B7]">
                 {menuLinks.map((l) => (
                   <li key={l.label}>
-                    <a className="transition-colors hover:text-[#FAF3E8]" href={l.href}>
+                    <a
+                      className="inline-block transition-all duration-200 ease-out hover:translate-x-1 hover:text-[#FAF3E8]"
+                      href={l.href}
+                    >
                       {l.label}
                     </a>
                   </li>
@@ -56,7 +59,10 @@ export function SiteFooter() {
               <ul className="mt-1 space-y-1.5 text-[12px] font-normal text-[#BEB7B7]">
                 {socialLinks.map((l) => (
                   <li key={l.label}>
-                    <a className="transition-colors hover:text-[#FAF3E8]" href={l.href}>
+                    <a
+                      className="inline-block transition-all duration-200 ease-out hover:translate-x-1 hover:text-[#FAF3E8]"
+                      href={l.href}
+                    >
                       {l.label}
                     </a>
                   </li>

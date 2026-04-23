@@ -15,7 +15,7 @@ function pillShadow(label: string) {
 function TagPill({ label }: { label: string }) {
   return (
     <span
-      className="inline-flex h-8 items-center justify-center rounded-full bg-[rgba(27,27,27,0.2)] px-4 text-[12.5px] font-light tracking-[-0.99px] text-[#e6ddd0]"
+      className="inline-flex h-8 items-center justify-center rounded-full bg-[rgba(27,27,27,0.2)] px-4 text-[12.5px] font-light tracking-[-0.99px] text-[#e6ddd0] transition-[transform,box-shadow] duration-200 ease-out will-change-transform hover:scale-[1.04] active:scale-[0.97]"
       style={{ boxShadow: pillShadow(label) }}
     >
       {label}
@@ -69,7 +69,6 @@ export type CaseStudyTemplateProps = {
   challengeBody: string;
   solutionTitle: string;
   solutionBody: string;
-  resultTitle: string;
   invertLogo: boolean;
   heroSrc: string;
   heroAlt: string;
@@ -82,8 +81,6 @@ export type CaseStudyTemplateProps = {
   galleryStackBottomAlt: string;
   galleryHeroTallSrc: string;
   galleryHeroTallAlt: string;
-  resultWideSrc: string;
-  resultWideAlt: string;
   resultTallSrc: string;
   resultTallAlt: string;
 };
@@ -101,7 +98,6 @@ export function CaseStudyTemplate({
   challengeBody,
   solutionTitle,
   solutionBody,
-  resultTitle,
   invertLogo,
   heroSrc,
   heroAlt,
@@ -114,8 +110,6 @@ export function CaseStudyTemplate({
   galleryStackBottomAlt,
   galleryHeroTallSrc,
   galleryHeroTallAlt,
-  resultWideSrc,
-  resultWideAlt,
   resultTallSrc,
   resultTallAlt,
 }: CaseStudyTemplateProps) {
@@ -140,23 +134,23 @@ export function CaseStudyTemplate({
           </div>
 
           <div className="relative mx-auto w-full max-w-[1220px] px-6 pb-0 pt-8 md:pt-12 lg:px-10">
-            <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-10 lg:flex-row lg:justify-center lg:gap-[72px] xl:gap-[100px]">
-              <div className="w-full max-w-[418px] shrink-0 rounded-t-[28px] bg-[rgba(217,217,217,0.2)] px-2 pb-0 pt-1">
-                <div className="relative aspect-[410/368] w-full overflow-hidden rounded-t-[24px]">
+            <div className="mx-auto flex max-w-[1100px] flex-col-reverse items-center gap-10 lg:flex-row lg:justify-center lg:gap-[72px] xl:gap-[100px]">
+              <div className="w-full max-w-[418px] shrink-0 rounded-t-[28px] bg-[rgba(217,217,217,0.2)] px-2 pb-0 pt-1 transition-[box-shadow,transform] duration-300 ease-out lg:hover:-translate-y-0.5 lg:hover:shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+                <div className="relative w-full overflow-hidden rounded-t-[24px] bg-[#1f1f1f]">
                   <img
                     src={heroSrc}
                     alt={heroAlt}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="block h-auto w-full"
                   />
                 </div>
               </div>
 
-              <div className="flex w-full max-w-[260px] flex-col gap-[22px] lg:shrink-0">
+              <div className="flex w-full max-w-[min(100%,320px)] flex-col gap-[22px] sm:max-w-[260px] lg:shrink-0">
                 {logoSrc ? (
                   <img
                     src={logoSrc}
                     alt={logoAlt}
-                    className={`h-[30px] w-auto max-w-[140px] object-contain object-left ${invertLogo ? "brightness-0 invert" : ""}`}
+                    className={`h-[30px] w-auto max-w-[140px] object-contain object-left transition-opacity duration-200 hover:opacity-85 ${invertLogo ? "brightness-0 invert" : ""}`}
                   />
                 ) : (
                   <p className="font-[family-name:var(--font-display)] text-[26px] font-light leading-tight tracking-[-0.04em] text-[#e6ddd0]">
@@ -197,11 +191,11 @@ export function CaseStudyTemplate({
                     href={projectUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-8 w-fit items-center justify-center gap-2.5 rounded-full bg-[rgba(27,27,27,0.2)] px-4 text-[12.5px] font-light tracking-[-0.99px] text-[#e6ddd0] transition hover:bg-[rgba(27,27,27,0.35)]"
+                    className="group/cta inline-flex h-8 w-fit items-center justify-center gap-2.5 rounded-full bg-[rgba(27,27,27,0.2)] px-4 text-[12.5px] font-light tracking-[-0.99px] text-[#e6ddd0] transition-all duration-200 ease-out hover:-translate-y-px hover:bg-[rgba(27,27,27,0.42)] active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e6ddd0]/50"
                     style={{ boxShadow: pillShadowByLabel["Web Development"] }}
                   >
                     {ctaLabel}
-                    <ExternalLinkGlyph className="text-[#e6ddd0]" />
+                    <ExternalLinkGlyph className="text-[#e6ddd0] transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-px" />
                   </a>
                 ) : null}
               </div>
@@ -221,34 +215,37 @@ export function CaseStudyTemplate({
                 </p>
               </div>
 
-              <div className="flex w-full flex-col gap-5 md:flex-row md:items-stretch md:gap-[21px]">
-                <div
-                  className={`flex w-full flex-col md:w-[255px] md:shrink-0 ${hasSecondGalleryImage ? "gap-6" : "gap-0"}`}
-                >
-                  <div
-                    className={`relative w-full overflow-hidden rounded-[14px] md:w-[255px] ${hasSecondGalleryImage ? "h-[164px]" : "h-[280px] md:h-[358px]"}`}
-                  >
+              <div className="flex w-full flex-col gap-5 md:flex-row md:items-start md:gap-[21px]">
+                <div className="flex w-full flex-col gap-6 md:w-[255px] md:shrink-0">
+                  <div className="group relative w-full overflow-hidden rounded-[14px] bg-[#faf3e8] md:w-[255px]">
                     <img
                       src={galleryStackTopSrc}
                       alt={galleryStackTopAlt}
-                      className="absolute inset-0 h-full w-full object-cover"
+                      className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.02] group-hover:brightness-[1.02]"
                     />
                   </div>
                   {hasSecondGalleryImage ? (
-                    <div className="relative h-[280px] w-full overflow-hidden rounded-[14px] md:h-[358px] md:w-[255px]">
+                    <div className="group relative w-full overflow-hidden rounded-[14px] bg-[#faf3e8] md:w-[255px]">
                       <img
                         src={galleryStackBottomSrc!}
                         alt={galleryStackBottomAlt}
-                        className="absolute inset-0 h-full w-full object-cover"
+                        className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.02] group-hover:brightness-[1.02]"
                       />
                     </div>
                   ) : null}
+                  <div className="group relative w-full overflow-hidden rounded-[14px] bg-[#faf3e8] md:w-[255px]">
+                    <img
+                      src={resultTallSrc}
+                      alt={resultTallAlt}
+                      className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.02] group-hover:brightness-[1.02]"
+                    />
+                  </div>
                 </div>
-                <div className="relative min-h-[360px] flex-1 overflow-hidden rounded-[14px] md:h-[547px] md:max-w-[498px]">
+                <div className="group relative w-full flex-1 overflow-hidden rounded-[14px] bg-[#faf3e8] md:max-w-[498px]">
                   <img
                     src={galleryHeroTallSrc}
                     alt={galleryHeroTallAlt}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.015] group-hover:brightness-[1.02]"
                   />
                 </div>
               </div>
@@ -260,28 +257,6 @@ export function CaseStudyTemplate({
                 <p className="max-w-[397px] text-[17px] leading-[1.67] text-[#171513] md:text-[18px] md:leading-[30px]">
                   {solutionBody}
                 </p>
-              </div>
-
-              <div className="flex w-full max-w-[774px] flex-col items-center gap-6">
-                <h2 className="w-full text-center font-[family-name:var(--font-display)] text-[32px] font-light tracking-[-1.13px] md:text-[36px] md:leading-[45px]">
-                  {resultTitle}
-                </h2>
-                <div className="flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-[18px]">
-                  <div className="relative aspect-[502/353] w-full overflow-hidden rounded-[14px] md:aspect-auto md:h-[353px] md:w-[502px] md:max-w-[min(502px,100%)] md:shrink-0">
-                    <img
-                      src={resultWideSrc}
-                      alt={resultWideAlt}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="relative mx-auto aspect-[254/345] w-full max-w-[254px] overflow-hidden rounded-[14px] md:mx-0 md:aspect-auto md:h-[345px] md:w-[254px] md:shrink-0">
-                    <img
-                      src={resultTallSrc}
-                      alt={resultTallAlt}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
           </div>

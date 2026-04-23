@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import { ContactFAQ } from "@/components/sandspire/ContactFAQ";
 import { SandspireHeader } from "@/components/sandspire/SandspireHeader";
-import { ScrollReveal } from "@/components/sandspire/ScrollReveal";
 import { SiteFooter } from "@/components/sandspire/SiteFooter";
 
 const categories = ["All", "Branding", "Web Development", "Social Media"];
@@ -80,7 +81,7 @@ export default function WorkPage() {
 
       <main className="mx-auto w-full max-w-[1280px] px-6 pb-0 pt-24 lg:px-0">
         <section className="mx-auto w-full max-w-[995px]">
-          <ScrollReveal className="w-full">
+          <div className="w-full">
             <h1 className="text-center font-[family-name:var(--font-display)] text-[44px] font-light leading-[1.05] text-[#FAF3E8]">
               Selected Work
             </h1>
@@ -88,7 +89,7 @@ export default function WorkPage() {
               A curated set of brand, web, and campaign projects crafted for teams
               that care about details.
             </p>
-          </ScrollReveal>
+          </div>
 
           <div className="mt-8 rounded-full bg-white/10 p-1.5">
             <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
@@ -97,7 +98,7 @@ export default function WorkPage() {
                   type="button"
                   key={category}
                   className={[
-                    "rounded-full px-4 py-2 text-[12px] transition-colors",
+                    "rounded-full px-4 py-2 text-[12px] transition-all duration-200 ease-out hover:scale-[1.03] active:scale-[0.98]",
                     idx === 0
                       ? "bg-white/20 text-[#FAF3E8]"
                       : "text-[#B5B5B5] hover:bg-white/10 hover:text-[#FAF3E8]",
@@ -111,51 +112,52 @@ export default function WorkPage() {
         </section>
 
         <section className="mx-auto mt-14 grid w-full max-w-[995px] gap-x-[47px] gap-y-[52px] md:grid-cols-2">
-          {projects.map((project, idx) => (
-            <ScrollReveal key={project.title} className="h-full" delay={0.05 + idx * 0.06}>
-              <article className="h-full rounded-[14px] border border-white/10 bg-white/[0.06] p-[18px] shadow-[0_12px_30px_rgba(0,0,0,0.25)]">
-              <div className="overflow-hidden rounded-[12px] bg-black/30">
-                <img
-                  src={project.imageSrc}
-                  alt={`${project.title} project preview`}
-                  className="h-auto w-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-
-              <div className="mt-5 flex items-start justify-between gap-4">
-                <h2 className="font-[family-name:var(--font-display)] text-[34px] font-light leading-[1.02] text-[#FAF3E8]">
-                  {project.title}
-                </h2>
-                <p className="max-w-[250px] text-right text-[14px] leading-[1.35] text-[#8A847B]">
-                  {project.description}
-                </p>
-              </div>
-
-              <div className="mt-4 h-px w-full bg-white/15" />
-
-              <div className="mt-4 flex items-center justify-between gap-3">
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={`${project.title}-${tag}`}
-                      className="rounded-full border bg-white/[0.06] px-3 py-1.5 text-[11px] font-medium text-[#F4ECE0] backdrop-blur-[8px]"
-                      style={getPillStyle(tag)}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          {projects.map((project) => (
+            <Link
+              key={project.title}
+              href={`/work/${project.slug}`}
+              className="group block h-full rounded-[14px] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(0,0,0,0.42)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7941D] active:translate-y-0 active:duration-150"
+            >
+              <article className="flex h-full flex-col rounded-[14px] border border-white/10 bg-white/[0.06] p-[18px] shadow-[0_12px_30px_rgba(0,0,0,0.25)] transition-[border-color,background-color] duration-300 group-hover:border-white/22 group-hover:bg-white/[0.09]">
+                <div className="overflow-hidden rounded-[12px] bg-black/30">
+                  <img
+                    src={project.imageSrc}
+                    alt={`${project.title} project preview`}
+                    className="h-auto w-full object-cover transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.04] group-hover:brightness-110"
+                    loading="lazy"
+                  />
                 </div>
 
-                <a
-                  href={`/work/${project.slug}`}
-                  className="text-[12px] font-medium text-[#A9A095] underline underline-offset-4 hover:text-[#FAF3E8]"
-                >
-                  View Project
-                </a>
-              </div>
-            </article>
-            </ScrollReveal>
+                <div className="mt-5 flex items-start justify-between gap-4">
+                  <h2 className="font-[family-name:var(--font-display)] text-[34px] font-light leading-[1.02] text-[#FAF3E8]">
+                    {project.title}
+                  </h2>
+                  <p className="max-w-[250px] text-right text-[14px] leading-[1.35] text-[#8A847B]">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className="mt-4 h-px w-full bg-white/15" />
+
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={`${project.title}-${tag}`}
+                        className="rounded-full border bg-white/[0.06] px-3 py-1.5 text-[11px] font-medium text-[#F4ECE0] backdrop-blur-[8px]"
+                        style={getPillStyle(tag)}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span className="text-[12px] font-medium text-[#A9A095] underline underline-offset-4 group-hover:text-[#FAF3E8]">
+                    View Project
+                  </span>
+                </div>
+              </article>
+            </Link>
           ))}
         </section>
       </main>

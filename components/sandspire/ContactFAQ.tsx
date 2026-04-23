@@ -73,7 +73,7 @@ export function ContactFAQ({ className }: ContactFAQProps) {
             </div>
           </div>
 
-          <div className="w-full max-w-[505px] shrink-0 rounded-[30px] border border-[#919191] bg-[rgba(85,85,85,0.08)] px-6 pb-8 pt-5 lg:min-h-[433px] lg:px-7 lg:pb-8 lg:pt-5">
+          <div className="w-full max-w-[505px] shrink-0 rounded-[30px] border border-[#919191] bg-[rgba(85,85,85,0.08)] px-6 pb-8 pt-5 transition-[box-shadow,border-color] duration-300 ease-out hover:border-[#a8a8a8] hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] lg:min-h-[433px] lg:px-7 lg:pb-8 lg:pt-5">
             <ContactForm />
           </div>
         </ScrollReveal>
@@ -85,7 +85,7 @@ export function ContactFAQ({ className }: ContactFAQProps) {
           <FaqAccordion items={faqItems} />
           <a
             href="#contact"
-            className="text-center font-[family-name:var(--font-body)] text-sm font-light tracking-[-0.02em] text-[#e6ddd0] underline decoration-solid underline-offset-4"
+            className="text-center font-[family-name:var(--font-body)] text-sm font-light tracking-[-0.02em] text-[#e6ddd0] underline decoration-solid underline-offset-4 transition-colors duration-200 hover:text-white"
           >
             Have more questions? Contact us
           </a>
@@ -111,7 +111,7 @@ function SocialIcon({
       href={href}
       aria-label={label}
       className={[
-        "inline-flex size-[50px] items-center justify-center rounded-[32px] text-[#faf3e8]",
+        "inline-flex size-[50px] items-center justify-center rounded-[32px] text-[#faf3e8] transition-all duration-200 ease-out hover:scale-110 hover:ring-2 hover:ring-white/20 active:scale-95",
         variant === "muted" ? "bg-[rgba(13,13,13,0.4)]" : "bg-black/30 ring-1 ring-white/10",
       ].join(" ")}
     >

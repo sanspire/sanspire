@@ -132,7 +132,6 @@ export default async function CaseStudyPage({ params }: Props) {
   const challengeBody = doc?.challengeBody ?? d.challengeBody;
   const solutionTitle = doc?.solutionTitle ?? d.solutionTitle;
   const solutionBody = doc?.solutionBody ?? d.solutionBody;
-  const resultTitle = doc?.resultTitle ?? d.resultTitle;
   const invertLogo =
     doc?.invertClientLogo !== undefined && doc?.invertClientLogo !== null
       ? Boolean(doc.invertClientLogo)
@@ -166,7 +165,6 @@ export default async function CaseStudyPage({ params }: Props) {
       challengeBody={challengeBody}
       solutionTitle={solutionTitle}
       solutionBody={solutionBody}
-      resultTitle={resultTitle}
       invertLogo={invertLogo}
       heroSrc={imageSrc({
         docPath: doc?.heroImagePath,
@@ -191,12 +189,6 @@ export default async function CaseStudyPage({ params }: Props) {
         fallback: d.images.galleryHeroTall,
       })}
       galleryHeroTallAlt={d.alts.galleryHeroTall}
-      resultWideSrc={imageSrc({
-        docPath: doc?.resultImageWidePath,
-        docImage: doc?.resultImageWide,
-        fallback: d.images.resultWide,
-      })}
-      resultWideAlt={d.alts.resultWide}
       resultTallSrc={imageSrc({
         docPath: doc?.resultImageTallPath,
         docImage: doc?.resultImageTall,

@@ -11,7 +11,7 @@ export function ContactForm() {
   }
 
   const field =
-    "h-[52px] w-full rounded-[22px] border border-transparent bg-[rgba(119,119,119,0.14)] px-6 text-[12px] font-medium text-[#e6ddd0] placeholder:text-[#777777] outline-none focus:border-white/25";
+    "h-[52px] w-full rounded-[22px] border border-transparent bg-[rgba(119,119,119,0.14)] px-6 text-[12px] font-medium text-[#e6ddd0] placeholder:text-[#777777] outline-none transition-[border-color,background-color,box-shadow] duration-200 focus:border-white/25 focus:bg-[rgba(119,119,119,0.2)] focus:shadow-[0_0_0_3px_rgba(255,255,255,0.06)]";
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-3">
@@ -49,7 +49,7 @@ export function ContactForm() {
 
         <button
           type="submit"
-          className="flex h-[52px] w-full items-center justify-center rounded-[22px] bg-[#ff5e00] text-[12px] font-semibold tracking-[-0.02em] text-[#faf3e8] transition-opacity hover:opacity-90 disabled:opacity-60"
+          className="flex h-[52px] w-full items-center justify-center rounded-[22px] bg-[#ff5e00] text-[12px] font-semibold tracking-[-0.02em] text-[#faf3e8] shadow-[0_6px_24px_rgba(255,94,0,0.35)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_10px_32px_rgba(255,94,0,0.45)] active:translate-y-0 active:scale-[0.99] disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:brightness-100"
           disabled={status === "submitted"}
         >
           Submit
