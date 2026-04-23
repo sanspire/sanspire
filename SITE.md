@@ -48,6 +48,7 @@ Each URL **`/work/{slug}`** loads a **`caseStudy`** document with the same **slu
 **Adding a new project later:** Add an entry to **`CASE_STUDY_PROJECTS`** in `lib/caseStudyProjectDefaults.ts`, add a card on **`/work`**, and re-run the seed (or create the doc in Studio).
 
 ## Recent Changes
+- 2026-04-23: **Deploy installs:** Project dependencies were adjusted so automated installs (for example on Cloudflare) pull **newer supporting libraries** behind the scenes; this removes noisy “deprecated package” messages during `npm install` without changing what visitors see on the site.
 - 2026-04-23: **Polish & mobile case studies:** Sitewide **hover / focus** micro-interactions (nav underlines, CTA lift + shadow, footer link nudge, work cards, homepage case rows, contact form + submit, FAQ pills, gallery image scale on case studies). **Case study hero:** on viewports below `lg`, **copy/meta appears first** and the **device image below** (`flex-col-reverse` + `lg:flex-row`).
 - 2026-04-23: **Work listing (`/work`):** Removed **`ScrollReveal`** on this page (no load/scroll-in animation). Each project card is a single Next.js link to **`/work/{slug}`** so the entire card opens the case study; “View Project” is plain text inside that link.
 - 2026-04-23: **Sanity case study fetch:** GROQ loads are **capped at ~12 seconds** per slug; on timeout or network error the page uses **`lib/caseStudyProjectDefaults.ts`** and logs a dev warning. **`getCaseStudyBySlug`** is **request-cached** so `generateMetadata` and the page don’t double-fetch.
