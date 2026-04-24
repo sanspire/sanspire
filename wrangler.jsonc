@@ -1,3 +1,6 @@
+// Cloudflare Workers / CI: you must run an OpenNext build before deploy.
+// • Two-step (recommended): Build command = "npm run build", Deploy = "npx wrangler deploy"
+// • Or one command: "npm run deploy" (or "npm run cf:workers") = build + deploy, no extra step
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"main": ".open-next/worker.js",

@@ -27,6 +27,13 @@ Sandspire is a custom marketing website for a creative studio focused on brand s
 - Motion
 - OpenNext for Cloudflare deployment
 
+## Cloudflare (Workers Builds / `wrangler deploy`)
+
+If the deploy log says *Could not find compiled Open Next config, did you run the build command?* the build step was skipped. **`opennextjs-cloudflare deploy` only uploads a *built* app**; it does not run the OpenNext build for you in CI the way a full `npm run deploy` would imply when split across phases.
+
+- **If your host has separate “Build” and “Deploy” steps:** set **Build** to `npm run build` and **Deploy** to `npx wrangler deploy` (or to `npx opennextjs-cloudflare deploy` after the same build).
+- **If you only have one deploy command:** set it to **`npm run deploy`** (same as **`npm run cf:workers`**) so OpenNext build runs before deploy.
+
 ## Local Development
 
 1. Install dependencies:
