@@ -30,10 +30,10 @@ Sandspire is a custom marketing website for a creative studio focused on brand s
 
 ## Cloudflare (Workers Builds / `wrangler deploy`)
 
-If the deploy log says *Could not find compiled Open Next config, did you run the build command?* the build step was skipped. **`opennextjs-cloudflare deploy` only uploads a *built* app**; it does not run the OpenNext build for you in CI the way a full `npm run deploy` would imply when split across phases.
+**“Could not find compiled Open Next config”** means the OpenNext build never ran: there is no **`.open-next/`** output yet. The repo’s **`wrangler.jsonc` includes a `build` command** that runs `opennextjs-cloudflare build` *before* Wrangler deploys, so a pipeline that only runs **`npx wrangler deploy`** can still work. Do **not** also set a **Build** step in the Cloudflare UI to `npm run build` unless you remove the Wrangler `build` block (or you will build OpenNext **twice**).
 
-- **If your host has separate “Build” and “Deploy” steps:** set **Build** to `npm run build` and **Deploy** to `npx wrangler deploy` (or to `npx opennextjs-cloudflare deploy` after the same build).
-- **If you only have one deploy command:** set it to **`npm run deploy`** (same as **`npm run cf:workers`**) so OpenNext build runs before deploy.
+- **If your host has separate “Build” and “Deploy” steps:** e.g. **Build** = `npm run build`, **Deploy** = `npx wrangler deploy` (no duplicate build in `wrangler.jsonc`), *or* leave **Build** empty and rely on **Wrangler’s** `build.command` only.
+- **Single command:** **`npm run deploy`** (or **`npm run cf:workers`**) = OpenNext build + deploy in one.
 
 **Sentry on the Worker:** `wrangler.jsonc` **`main`** is **`cf-worker-sentry.ts`**, which wraps OpenNext’s **`.open-next/worker.js`** with **`@sentry/cloudflare` `withSentry`**. Set **`SENTRY_DSN`** or **`NEXT_PUBLIC_SENTRY_DSN`** on the Worker in the Cloudflare dashboard. **`nodejs_compat`** is already in **`compatibility_flags`** (needed for `AsyncLocalStorage`).
 

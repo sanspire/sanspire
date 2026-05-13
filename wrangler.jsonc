@@ -1,11 +1,15 @@
-// Cloudflare Workers / CI: you must run an OpenNext build before deploy.
-// • Two-step (recommended): Build command = "npm run build", Deploy = "npx wrangler deploy"
-// • Or one command: "npm run deploy" (or "npm run cf:workers") = build + deploy, no extra step
+// `build.command` runs before `wrangler dev` / `wrangler deploy` (Wrangler "custom build"),
+// so CI that only runs `npx wrangler deploy` still runs OpenNext first (see
+// `scripts/wrangler-opennext-build.cjs`). If the Cloudflare UI also has a **Build** step
+// that runs `npm run build`, remove one or the other to avoid building twice.
 //
 // Entry is `cf-worker-sentry.ts`: it re-exports OpenNext and wraps the default handler with
 // `@sentry/cloudflare` `withSentry` (see that file + `compatibility_flags` includes `nodejs_compat`).
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
+	"build": {
+		"command": "node ./scripts/wrangler-opennext-build.cjs"
+	},
 	"main": "cf-worker-sentry.ts",
 	"name": "sandspire",
 	"compatibility_date": "2026-04-23",
