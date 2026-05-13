@@ -60,6 +60,7 @@ export function WebDesignPortfolioCascade({
                   alt=""
                   className="h-full w-full object-cover"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             ))}

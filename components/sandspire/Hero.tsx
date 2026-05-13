@@ -1,4 +1,5 @@
 import { LogoMarquee } from "@/components/sandspire/LogoMarquee";
+import { DeferredVideo } from "@/components/sandspire/DeferredVideo";
 import { ScrollReveal } from "@/components/sandspire/ScrollReveal";
 import { SiteNavBar } from "@/components/sandspire/SiteNavBar";
 
@@ -15,14 +16,15 @@ export function Hero() {
       <div className="relative w-full overflow-hidden">
         <div className="relative isolate h-[93vh] min-h-[680px] overflow-hidden rounded-b-[42px] [transform:translateZ(0)]">
           <div className="absolute inset-0 z-0">
-            <video
+            <DeferredVideo
               className="block h-full w-full rounded-b-[42px] object-cover"
               src="/videos/HeroVideo-2%20(1).mp4"
-              poster="/images/HeroVideoFallback.png"
+              poster="/images/hero/HeroVideoFallback.png"
               autoPlay
               muted
               loop
               playsInline
+              loadStrategy="eager"
             />
           </div>
           <div className="absolute bottom-0 right-0 z-[1] h-full w-full bg-gradient-to-b from-black/72 via-black/48 to-black/20" />

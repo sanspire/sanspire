@@ -141,6 +141,8 @@ export function WorkProjectTemplate({
                     src={heroSrc}
                     alt={heroAlt}
                     className="block h-auto w-full"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -151,6 +153,7 @@ export function WorkProjectTemplate({
                     src={logoSrc}
                     alt={logoAlt}
                     className={`h-[30px] w-auto max-w-[140px] object-contain object-left transition-opacity duration-200 hover:opacity-85 ${invertLogo ? "brightness-0 invert" : ""}`}
+                    decoding="async"
                   />
                 ) : (
                   <p className="font-[family-name:var(--font-display)] text-[26px] font-light leading-tight tracking-[-0.04em] text-[#e6ddd0]">
@@ -222,6 +225,8 @@ export function WorkProjectTemplate({
                       src={galleryStackTopSrc}
                       alt={galleryStackTopAlt}
                       className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.02] group-hover:brightness-[1.02]"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   {hasSecondGalleryImage ? (
@@ -230,6 +235,8 @@ export function WorkProjectTemplate({
                         src={galleryStackBottomSrc!}
                         alt={galleryStackBottomAlt}
                         className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.02] group-hover:brightness-[1.02]"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   ) : null}
@@ -238,6 +245,8 @@ export function WorkProjectTemplate({
                       src={resultTallSrc}
                       alt={resultTallAlt}
                       className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.02] group-hover:brightness-[1.02]"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>
@@ -246,6 +255,8 @@ export function WorkProjectTemplate({
                     src={galleryHeroTallSrc}
                     alt={galleryHeroTallAlt}
                     className="block h-auto w-full origin-center transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.015] group-hover:brightness-[1.02]"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>

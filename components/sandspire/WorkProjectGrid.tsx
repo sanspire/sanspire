@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
-
 import type { WorkIndexCard } from "@/sanity/lib/queries/workIndex";
 
 const PILL_CATEGORIES = new Set([
@@ -149,12 +149,15 @@ export function WorkProjectGrid({ projects }: Props) {
             <article className="flex h-full min-h-0 flex-col rounded-[14px] border border-white/10 bg-white/[0.06] p-4 shadow-[0_12px_30px_rgba(0,0,0,0.25)] transition-[border-color,background-color] duration-300 sm:p-[18px] group-hover:border-white/22 group-hover:bg-white/[0.09]">
               <div className="overflow-hidden rounded-[12px] bg-black/30">
                 {project.imageSrc ? (
-                  <img
-                    src={project.imageSrc}
-                    alt={`${project.title} project preview`}
-                    className="h-auto w-full object-cover transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.04] group-hover:brightness-110"
-                    loading="lazy"
-                  />
+                  <div className="relative aspect-[4/3] w-full">
+                    <Image
+                      src={project.imageSrc}
+                      alt={`${project.title} project preview`}
+                      fill
+                      sizes="(min-width: 768px) 470px, 100vw"
+                      className="object-cover transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.04] group-hover:brightness-110"
+                    />
+                  </div>
                 ) : (
                   <div className="aspect-[4/3] w-full bg-white/5" />
                 )}

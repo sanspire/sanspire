@@ -113,6 +113,8 @@ export function SiteNavBar({
             alt="Sandspire"
             className="h-7 w-auto"
             loading={logoLoading}
+            decoding="async"
+            fetchPriority={logoLoading === "eager" ? "high" : "auto"}
           />
         </Link>
 

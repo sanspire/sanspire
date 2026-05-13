@@ -1,8 +1,8 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
+import { DeferredVideo } from "@/components/sandspire/DeferredVideo";
 import { ScrollReveal } from "@/components/sandspire/ScrollReveal";
 import { WebDesignPortfolioCascade } from "@/components/sandspire/WebDesignPortfolioCascade";
-
-const AI_DOT_MATRIX = "/images/bento/ai-automation-dot-matrix.png";
 
 export function ServicesBento() {
   const brandStrategyImages = [
@@ -53,14 +53,15 @@ export function ServicesBento() {
                       className="absolute inset-x-3 top-3 h-[calc(100%-18px)] rounded-[18px] bg-black/10 md:inset-x-4"
                       aria-hidden
                     />
-                    <video
+                    <DeferredVideo
                       className="absolute bottom-0 left-1/2 h-[520px] w-full min-w-full max-w-none -translate-x-1/2 object-cover object-bottom"
                       src="/videos/InstagramViewsAnalytics.mp4"
-                      poster="/images/InstagramViewsAnalyticsFallback2.png"
+                      poster="/images/bento/InstagramViewsAnalyticsFallback2.png"
                       autoPlay
                       muted
                       loop
                       playsInline
+                      loadStrategy="visible"
                     />
                   </div>
                 </div>
@@ -70,11 +71,13 @@ export function ServicesBento() {
                 className="h-full min-h-[320px] md:min-h-[380px]"
                 title="AI Automation"
                 priceLine="Starting from AED 10,000"
-                patternImage={AI_DOT_MATRIX}
+                showPattern
               >
-                <img
+                <Image
                   src="/images/Service%20Icon%20Group.svg"
                   alt=""
+                  width={246}
+                  height={210}
                   className="relative z-[1] mx-auto mt-3 h-[180px] w-auto rounded-[12px] object-contain opacity-95 md:mt-4 md:h-[210px]"
                   loading="lazy"
                 />
@@ -133,14 +136,15 @@ export function ServicesBento() {
               >
                 <div className="absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_40%_60%,rgba(163,31,17,0.5)_0%,transparent_65%)]" />
               </div>
-              <video
+              <DeferredVideo
                 className="relative z-[1] mx-auto h-[min(360px,42vh)] w-[min(100%,100%)] max-w-[min(400px,92vw)] shrink-0 rounded-[20px] object-cover object-bottom shadow-[0_3px_12px_rgba(0,0,0,0.44)] sm:max-w-[min(420px,90%)] md:h-[560px] md:max-w-none md:w-[280px]"
                 src="/videos/InstagramViewsAnalytics.mp4"
-                poster="/images/InstagramViewsAnalyticsFallback2.png"
+                poster="/images/bento/InstagramViewsAnalyticsFallback2.png"
                 autoPlay
                 muted
                 loop
                 playsInline
+                loadStrategy="visible"
               />
             </div>
           </ServiceMediaCard>
@@ -240,10 +244,10 @@ function ServiceInfoCard(props: {
   className?: string;
   title: string;
   priceLine: string;
-  patternImage?: string;
+  showPattern?: boolean;
   children?: React.ReactNode;
 }) {
-  const { className = "", title, priceLine, patternImage, children } = props;
+  const { className = "", title, priceLine, showPattern, children } = props;
 
   return (
     <div
@@ -254,22 +258,27 @@ function ServiceInfoCard(props: {
       }}
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.12),transparent_48%)]" />
-      {patternImage ? (
+      {showPattern ? (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div
             className="absolute"
             style={{
-              left: "69%",
-              top: "62%",
-              width: "300%",
-              height: "155%",
+              left: "74%",
+              top: "64%",
+              width: "240%",
+              height: "145%",
               transform: "translate(-50%, -50%) scaleY(-1) rotate(180deg)",
             }}
           >
-            <img
-              src={patternImage}
-              alt=""
-              className="h-full w-full object-cover opacity-90 mix-blend-lighten"
+            <div
+              className="h-full w-full opacity-70 mix-blend-lighten"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.48) 1px, transparent 0)",
+                backgroundSize: "13px 13px",
+                maskImage:
+                  "radial-gradient(ellipse at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 44%, transparent 72%)",
+              }}
             />
           </div>
         </div>

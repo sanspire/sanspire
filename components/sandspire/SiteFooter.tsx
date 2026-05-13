@@ -30,6 +30,7 @@ export function SiteFooter() {
               alt="Sandspire"
               className="h-10 w-auto"
               loading="lazy"
+              decoding="async"
             />
             <p className="font-[family-name:var(--font-display)] text-[28px] font-light leading-[1.05] text-[#FAF3E8]">
               Great design should

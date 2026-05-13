@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { ScrollReveal } from "@/components/sandspire/ScrollReveal";
@@ -47,12 +48,13 @@ export function CaseStudies() {
               <article className="grid items-center gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-8">
               <div className="w-full">
                 <div className="overflow-hidden rounded-[20px] border border-black/15 bg-black/20 p-1 shadow-[0_5px_14px_rgba(0,0,0,0.14)] transition-[transform,box-shadow] duration-300 ease-out group-hover/case:-translate-y-0.5 group-hover/case:shadow-[0_12px_28px_rgba(0,0,0,0.18)]">
-                  <div className="overflow-hidden rounded-[17px] bg-[#d7cec0]">
-                    <img
+                  <div className="relative aspect-[3/2] overflow-hidden rounded-[17px] bg-[#d7cec0] lg:min-h-[320px]">
+                    <Image
                       src={c.imageSrc}
                       alt={`${c.title} preview`}
-                      className="aspect-[3/2] w-full object-cover transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover/case:scale-[1.03] group-hover/case:brightness-105 lg:min-h-[320px]"
-                      loading="lazy"
+                      fill
+                      sizes="(min-width: 1024px) 580px, 100vw"
+                      className="object-cover transition-[transform,filter] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover/case:scale-[1.03] group-hover/case:brightness-105"
                     />
                   </div>
                 </div>

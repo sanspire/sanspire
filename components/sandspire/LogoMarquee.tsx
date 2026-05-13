@@ -21,6 +21,7 @@ export const LogoMarquee = () => {
             alt={logo.alt}
             className="h-[24px] w-auto shrink-0 select-none object-contain"
             loading="lazy"
+            decoding="async"
           />
         ))}
         </div>
@@ -30,4 +31,3 @@ export const LogoMarquee = () => {
     </div>
   );
 };
-

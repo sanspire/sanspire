@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["motion"],
   },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
   turbopack: {
     resolveAlias: {
       // When using `next dev` / `next build --turbopack`, drop Vercel OG (WASM) from the trace
